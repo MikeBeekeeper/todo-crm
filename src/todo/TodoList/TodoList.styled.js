@@ -7,7 +7,7 @@ export const List = styled.ul`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    border-bottom: 1px solid #000;
+    // border-bottom: 1px solid #000;
     padding-bottom: 5px;
     margin-bottom: 20px;
   }
@@ -48,4 +48,32 @@ export const ControlsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+`;
+
+export const DeleteButton = styled.button`
+width: 20px;
+height: 20px;
+font-weight: 300;
+font-size: 18px;
+color: #000000;
+background-color: transparent;
+border: none;
+
+:hover{
+  transform: scale(1.5)
+}
+`;
+
+export const FormButton = styled.button`
+border-radius: 30%;
+background-color: transparent;
+border: 1.2px solid rgba(0, 0, 0, 0.65);
+text-align: center;
+font-size: 15px;
+
+
+:hover{
+  transform: scale(1.2);
+}
 `;

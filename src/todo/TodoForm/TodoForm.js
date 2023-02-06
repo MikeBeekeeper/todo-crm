@@ -1,8 +1,9 @@
 import { Switch } from '@mui/material';
 import { style } from '@mui/system';
+
 import { useRef, useState } from 'react';
 import { icons } from '../constans';
-import { Form } from './Todoform.styled';
+import { Form , InputId} from './Todoform.styled';
 
 export const TodoForm = ({ submitHandler, disabledIds }) => {
   const nameRef = useRef();
@@ -30,21 +31,21 @@ export const TodoForm = ({ submitHandler, disabledIds }) => {
       submitHandler({
         id: valueID,
         name: nameRef.current.value,
-        sku: 'xxx-',
+        sku: 'xxxx-',
       });
     }
   };
 
   return (
     <Form>
-      <div>
+      <div style={{width: '50px'}}>
         <Switch defaultValue="checked" />
       </div>
-      <div>
+      <div style={{width: '40px'}}>
         <span>xxxx-</span>
       </div>
-      <div>
-        <input
+      <div style={{width: '40px'}}>
+        <InputId
           name="id"
           type="number"
           onChange={applyId}
@@ -57,11 +58,12 @@ export const TodoForm = ({ submitHandler, disabledIds }) => {
           autoFocus
         />
       </div>
-      <div>
-        <img src={icons[0].url} alt="icon" />
+      <div style={{width: '115px'}}>
+        <img src={icons[0].url} alt="icon" style={{width:'15px'}} />
 
-        <input name="name" onKeyDown={applyName} ref={nameRef} />
+        <InputId name="name" onKeyDown={applyName} ref={nameRef} style={{width: 90}}/>
       </div>
+      <div style={{width: '20px', height: '20px'}}></div>
     </Form>
   );
 };

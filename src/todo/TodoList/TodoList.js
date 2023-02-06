@@ -6,8 +6,9 @@ import {
   Autocomplete,
   TextField,
 } from '@mui/material';
+// import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { useState } from 'react';
-import { List, TodoItem, ControlsContainer } from './TodoList.styled';
+import { List, TodoItem, ControlsContainer, DeleteButton, FormButton } from './TodoList.styled';
 import { TodoForm } from '../TodoForm';
 import { icons } from '../constans';
 
@@ -63,19 +64,20 @@ export const TodoList = () => {
           }}
           isSelected={item.isSelected}
         >
-          <div style={{ paddingLeft: 15 }}>
+              <div style={{ paddingLeft: 15, width: 50 }}>
             <Switch defaultValue="checked" />
           </div>
-          <div>
+          <div style={{width: 40}}>
             <span>{item.sku}</span>
           </div>
-          <div>
+          <div style={{width: 40}}>
             <span>{item.id}</span>
           </div>
           <div
             style={{
               overflow: 'hidden',
-              textOverflow: 'ellipsis',
+                      textOverflow: 'ellipsis',
+              width: 115
             }}
           >
             {getIconUrl(item.iconID) && (
@@ -84,7 +86,7 @@ export const TodoList = () => {
 
             <span style={{ whiteSpace: 'nowrap' }}>{item.name}</span>
           </div>
-          <Button
+          <DeleteButton
             onClick={() => {
               setTodo((todo) =>
                 todo.filter(({ id }) => item.id !== id)
@@ -92,7 +94,7 @@ export const TodoList = () => {
             }}
           >
             x
-          </Button>
+          </DeleteButton>
         </TodoItem>
       );
     });
@@ -103,15 +105,15 @@ export const TodoList = () => {
       <div style={{ width: 700, height: 500 }}>
         <List>
           <li style={{ height: '73px' }}>
-            <span>Статус</span>
-            <span>Товар</span>
-            <span>ID</span>
+            <span style={{ paddingLeft: '15px', width: '50px' }}>Статус</span>
+            <span style={{width: '40px'}}>Товар</span>
+            <span style={{width: '40px'}}>ID</span>
 
-            <div>
+            <div style={{width: '115px'}}>
               <span>Название</span>
               <Autocomplete
-                sx={{ width: 200 }}
-                size="small"
+                sx={{ width: '100%' }}
+                
                 options={todo}
                 getOptionLabel={(option) => option.name}
                 renderInput={(params) => (
@@ -124,18 +126,20 @@ export const TodoList = () => {
             </div>
 
             <ControlsContainer>
-              <Button
+              <FormButton
                 onClick={showNewForm}
-                variant="contained"
-                size="small"
+                // variant="text"
+                // size="small"
+                // color="inherit"
+                
               >
-                +
-              </Button>
+              +
+              </FormButton>
 
               {isDeleteVisible() && (
-                <Button
-                  variant="contained"
-                  size="small"
+                <FormButton
+                //   variant="contained"
+                //   size="small"
                   onClick={() => {
                     setTodo((todo) =>
                       todo.filter((item) => !item.isSelected)
@@ -143,7 +147,7 @@ export const TodoList = () => {
                   }}
                 >
                   x
-                </Button>
+                </FormButton>
               )}
             </ControlsContainer>
           </li>
@@ -162,3 +166,27 @@ export const TodoList = () => {
     </Stack>
   );
 };
+
+
+{/* <Button
+                onClick={showNewForm}
+                variant="text"
+                size="small"
+                color="inherit"
+                
+              >
+              +
+              </Button>
+
+              {isDeleteVisible() && (
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => {
+                    setTodo((todo) =>
+                      todo.filter((item) => !item.isSelected)
+                    );
+                  }}
+                >
+                  x
+                </Button> */}
