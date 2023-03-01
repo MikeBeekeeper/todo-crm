@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { data } from './mock';
 import {
   Button,
@@ -28,8 +29,14 @@ export const TodoList = () => {
 
   const addTodo = (todoItem) => {
     setTodo((todo) => {
-      return [todoItem, ...todo];
+      const find = todo.find((t) => t.id === todoItem.id)
+      if (!find) {
+        return [todoItem, ...todo];
+      }
+      Notify.failure('whoops')
+      return todo;
     });
+    
 
     setFormVisible(!isFormVisible);
   };
@@ -76,7 +83,7 @@ export const TodoList = () => {
           <div
             style={{
               overflow: 'hidden',
-                      textOverflow: 'ellipsis',
+              textOverflow: 'ellipsis',
               width: 115
             }}
           >
@@ -155,6 +162,7 @@ export const TodoList = () => {
           {isFormVisible && (
             <li>
               <TodoForm
+                todo={todo}
                 submitHandler={addTodo}
                 disabledIds={todo.map((item) => item.id)}
               />

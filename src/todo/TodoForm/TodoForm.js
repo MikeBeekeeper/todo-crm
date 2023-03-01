@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Switch } from '@mui/material';
 import { style } from '@mui/system';
 
@@ -5,25 +6,16 @@ import { useRef, useState } from 'react';
 import { icons } from '../constans';
 import { Form , InputId} from './Todoform.styled';
 
-export const TodoForm = ({ submitHandler, disabledIds }) => {
+export const TodoForm = ({ submitHandler, disabledIds, todo }) => {
   const nameRef = useRef();
   const [valueID, setID] = useState('');
   const [validated, setValidated] = useState(true);
 
   const applyId = (e) => {
-    if (
-      e.target.value < 1000 &&
-      !disabledIds.includes(Number(e.target.value))
-    )
-      setID(e.target.value);
-
-    // if (e.target.value < 1000) setID(e.target.value);
-
-    // if (disabledIds.includes(Number(e.target.value))) {
-    //   setValidated(false);
-    // } else {
-    //   setValidated(true);
-    // }
+    if (e.key === 'Enter' && e.target.value < 1000 &&
+      !disabledIds.includes(Number(e.target.value))) {
+              nameRef.current.focus();
+            }
   };
 
   const applyName = (e) => {
@@ -35,6 +27,13 @@ export const TodoForm = ({ submitHandler, disabledIds }) => {
       });
     }
   };
+
+  const onBlurExamination = (e) => {
+    const find = todo.find((t) => t.id === e.target.value);
+    if (find) {
+       Notify.failure('Whoops') 
+    } 
+  }
 
   return (
     <Form>
@@ -48,18 +47,15 @@ export const TodoForm = ({ submitHandler, disabledIds }) => {
         <InputId
           name="id"
           type="number"
-          onChange={applyId}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              nameRef.current.focus();
-            }
-          }}
+          onChange={(e) => { setID(e.target.value) }}
+          onKeyDown={applyId}
+          onBlur={onBlurExamination}
           value={valueID}
           autoFocus
         />
       </div>
       <div style={{width: '115px'}}>
-        <img src={icons[0].url} alt="icon" style={{width:'15px'}} />
+        {/* <img src={icons[0].url} alt="icon" style={{width:'15px'}} /> */}
 
         <InputId name="name" onKeyDown={applyName} ref={nameRef} style={{width: 90}}/>
       </div>
