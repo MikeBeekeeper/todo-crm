@@ -16,3 +16,11 @@ border-color: transparent;
 border-bottom: 1px solid black;
 outline: transparent
 `;
+
+export const TextArea = styled.textarea`
+width: 100%; 
+border-color: transparent;
+border: 1px solid black;
+outline: transparent
+resize: none
+`;

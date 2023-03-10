@@ -30,7 +30,9 @@ export const TodoList = () => {
   const addTodo = (todoItem) => {
     setTodo((todo) => {
       const find = todo.find((t) => t.id === todoItem.id)
+      
       if (!find) {
+        setFormVisible(!isFormVisible);
         return [todoItem, ...todo];
       }
       Notify.failure('whoops')
@@ -38,7 +40,7 @@ export const TodoList = () => {
     });
     
 
-    setFormVisible(!isFormVisible);
+    
   };
 
   const selectItem = (id) => {
@@ -71,12 +73,13 @@ export const TodoList = () => {
           }}
           isSelected={item.isSelected}
         >
-              <div style={{ paddingLeft: 15, width: 50 }}>
+          <div style={{ paddingLeft: 15, width: 200 }}>{item.description}</div>
+              {/* <div style={{ paddingLeft: 15, width: 50 }}>
             <Switch defaultValue="checked" />
           </div>
           <div style={{width: 40}}>
             <span>{item.sku}</span>
-          </div>
+          </div> */}
           <div style={{width: 40}}>
             <span>{item.id}</span>
           </div>
@@ -111,16 +114,16 @@ export const TodoList = () => {
     <Stack alignItems="center" sx={{ mt: 5 }}>
       <div style={{ width: 700, height: 500 }}>
         <List>
-          <li style={{ height: '73px' }}>
-            <span style={{ paddingLeft: '15px', width: '50px' }}>Статус</span>
-            <span style={{width: '40px'}}>Товар</span>
-            <span style={{width: '40px'}}>ID</span>
+          <li style={{ height: '73px', borderBottom: '1px solid black' }}>
+            <div style={{paddingLeft: '15px',width: '200px'}}>Description<span style={{fontSize: 12}}> (optional)</span></div>
+            {/* <span style={{ paddingLeft: '15px', width: '50px' }}>Статус</span>
+            <span style={{width: '40px'}}>Товар</span> */}
+            <span style={{width: '40px'}}>Article</span>
 
             <div style={{width: '115px'}}>
-              <span>Название</span>
+              <span>Title</span>
               <Autocomplete
-                sx={{ width: '100%' }}
-                
+                sx={{ width: '100%' }}                
                 options={todo}
                 getOptionLabel={(option) => option.name}
                 renderInput={(params) => (

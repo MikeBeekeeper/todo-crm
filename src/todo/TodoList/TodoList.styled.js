@@ -19,6 +19,7 @@ export const List = styled.ul`
 export const TodoItem = styled.li`
   display: flex;
   width: 100%;
+  min-height: 50px;
   justify-content: space-between;
   position: relative;
   margin-bottom: 10px;
